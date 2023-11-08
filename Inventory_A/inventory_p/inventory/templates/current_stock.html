@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block body %}
+<h3 style="margin-top: 10px;">Current Stock</h3>
+<style>
+    .custom-table {
+        background-color: rgba(255, 255, 255, 0.5);
+        margin-top: 20px;
+        border-collapse: separate;
+        border-spacing: 20px;
+        width: 100%;
+    }
+</style>
+<form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="itemSelect">Select Item:</label>
+      <select class="form-control" id="itemSelect" name="selected_item">
+        {% for item_name in item_names %}
+          <option value="{{ item_name }}">{{ item_name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  
+<table class="custom-table">
+    <thead>
+        <tr>
+            <th>Item Name</th>
+            <th>Purchase Quantity</th>
+            <th>Sale Quantity</th>
+            <th>Current Stock</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in items %}
+            <tr>
+                <td>{{ item.item_name }}</td>
+                <td>{{ item.purchase_quantity }}</td>
+                <td>{{ item.sale_quantity }}</td>
+                <td>{{ item.current_stock }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</form>
+{% endblock %}

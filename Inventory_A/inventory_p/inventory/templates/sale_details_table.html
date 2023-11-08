@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<script>
+    function printSpecificDiv() {
+      if (confirm("Do you want to print?")) {
+        // Get the specific div by its ID
+        var divToPrint = document.getElementById('contentToPrint');
+        if (divToPrint) {
+          var printing = window.open('', '', 'left=0,top=0,width=550,height=400,toolbar=0,scrollbars=0');
+          printing.document.write('<html><head><title>Print</title></head><body>');
+          printing.document.write(divToPrint.innerHTML); // Print the contents of the specific div
+          printing.document.write('</body></html>');
+          printing.document.close();
+          printing.focus();
+          printing.print();
+        } else {
+          console.error('Element with ID "contentToPrint" not found.');
+        }
+      }
+    }
+      </script>
+
+<div id="contentToPrint">
+<h1>Sale Details</h1>
+
+<br>
+<style>
+  .custom-table {
+      background-color: rgba(255, 255, 255, 0.5); /* Use your desired color values and opacity here */
+      margin-top: 52px;
+      border-collapse: separate; /* Separate border-spacing model */
+      border-spacing: 20px;
+      width: 100%; /* Adjust the spacing between rows and columns as needed */
+  }
+  
+</style>  
+<table class="custom-table">
+
+        <thead>
+            <tr>
+                <th>Total Amount</th>
+                <th>Invoice Date</th>
+                <th>Invoice Number</th>
+                <th>Customer Name</th>
+                <th>Customer Number</th>
+                <th>Item Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Amount</th>                
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for sale_detail in sale_details %}
+            <tr>
+                <td>{{ sale_detail.0}}</td>
+                <td>{{ sale_detail.1}}</td>
+                <td>{{ sale_detail.2}}</td>
+                <td>{{ sale_detail.3}}</td>
+                <td>{{ sale_detail.4}}</td>
+                <td>{{ sale_detail.5}}</td>
+                <td>{{ sale_detail.6}}</td>
+                <td>{{ sale_detail.7}}</td>
+                <td>{{ sale_detail.8}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <p style="text-align : center">
+        <input type="button" value="Print" name="printbtn" onclick="printSpecificDiv()" class="btn btn-secondary">
+      </p>
+</div>
+
+{% endblock %}

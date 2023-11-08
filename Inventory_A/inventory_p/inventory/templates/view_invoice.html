@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block body %}
+    <h3>Invoice Details</h3>
+    <p><strong>Invoice No:&nbsp;</strong><b> {{ purchase.invoice_no }}</b></p>
+    <p><strong>Invoice Date:&nbsp;</strong><b>{{ purchase.invoice_date }}</b></p>
+    <p><strong>Supplier Name:&nbsp;</strong><b>{{ purchase.supplier }}</b></p>
+    <p><strong>Total Amount:&nbsp;</strong><b>{{ purchase.total_amount }}</b></p>
+
+    <h4>Purchase Details</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for detail in purchase_details %}
+                <tr>
+                    <td>{{ detail.item.item_name }}</td>
+                    <td>{{ detail.price }}</td>
+                    <td>{{ detail.quantity }}</td>
+                    <td>{{ detail.amount }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

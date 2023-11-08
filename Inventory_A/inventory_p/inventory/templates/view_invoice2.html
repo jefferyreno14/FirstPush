@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block body %}
+
+ 
+        <h3>Invoice Details</h3>
+        <p><strong>Invoice No:&nbsp;</strong><b> {{ sale.invoice_no }}</b></p>
+        <p><strong>Invoice Date:&nbsp;</strong><b> {{ sale.invoice_date }}</b></p>
+        <p><strong>Customer Name:&nbsp;</strong><b> {{ sale.customer_name }}</b></p>
+        <p><strong>Total Amount:&nbsp;</strong><b> {{ sale.total_amount }}</b></p>
+        <!-- Add more details as needed -->
+        <h4>Sale Details</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for detail in sale_details %}
+                <tr>
+                    <td>{{ detail.item.item_name }}</td>
+                    <td>{{ detail.price }}</td>
+                    <td>{{ detail.qty }}</td>
+                    <td>{{ detail.amount }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
